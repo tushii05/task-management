@@ -1,22 +1,3 @@
-// const jwt = require('express-jwt');
-// const db = require('../config/db');
-
-
-// module.exports = { user };
-// function user() {
-//     return [
-//         jwt({ secret: process.env.SECRETSTRING, algorithms: ['HS256'] }),
-//         async (req, res, next) => {
-//             const user = await db.User.findOne({ where: { id: req.user.sub } });
-//             if (!user)
-//                 return res.status(401).json({ message: 'Unauthorized' });
-//             req.user = user.get();
-//             next();
-//         }
-//     ];
-// }
-
-
 const jwt = require('jsonwebtoken');
 
 function requireToken(req, res, next) {
