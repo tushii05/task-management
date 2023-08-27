@@ -5,27 +5,22 @@ const Task = require("./task.model");
 
 module.exports = {
     getAll,
-    findById,
+    findId,
     create,
     update,
     _delete
 };
 
 
-async function getAll({ offset = 0, limit = 100, orderBy = 'id', orderType = 'desc', search = null }) {
-    const regex = new RegExp(search, 'i');
-    const Tasks = await Task.find({ name: regex })
-        .skip(parseInt(offset))
-        .limit(parseInt(limit))
-        .sort({ [orderBy]: orderType });
+async function getAll() {
+    const Tasks = await Task.find();
+    if (!Tasks) throw 'Task not found';
     return Tasks;
 }
 
 async function create(params) {
-    console.log(params)
-    const Task = new db.Task(params);
-    console.log(Task,"Task")
-    const savedTask = await Task.save();
+    const Tasks = await Task.create(params);
+    const savedTask = await Tasks.save();
     return savedTask;
 }
 
@@ -35,10 +30,10 @@ async function update(id, params) {
     return updatedTask;
 }
 
-async function findById(id) {
-    const Task = await Task.findById(id);
-    if (!Task) throw 'Task not found';
-    return Task;
+async function findId(id) {
+    const Tasks = await Task.findById(id);
+    if (!Tasks) throw 'Task not found';
+    return Tasks;
 }
 
 
