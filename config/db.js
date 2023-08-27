@@ -23,6 +23,7 @@ function isValidId(id) {
 }
 
 const users = require('../modules/users/user.model');
+
 const task = require('../modules/task/task.model');
 
 module.exports = {
